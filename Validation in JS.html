@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form Validation Example</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 300px;
+            }
+
+            label {
+                font-size: 14px;
+                color: #333333;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            input[type="submit"] {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 16px;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+            #error {
+                color: red;
+                font-size: 12px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <h2>Registration Form</h2>
+
+        <form id="myForm" onsubmit="return validateForm()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" /><br />
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" /><br />
+
+            <input type="submit" value="Submit" />
+        </form>
+
+        <p id="error"></p>
+
+        <script>
+            function validateForm() {
+                let username = document.getElementById("username").value.trim();
+                let email = document.getElementById("email").value.trim();
+                let errorMessage = "";
+
+                // Username validation
+                if (username === "") {
+                    errorMessage += "Username is required.<br/>";
+                }
+
+                // Email validation using regex
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email === "") {
+                    errorMessage += "Email is required.<br/>";
+                } else if (!emailPattern.test(email)) {
+                    errorMessage += "Please enter a valid email address.<br/>";
+                }
+
+                if (errorMessage) {
+                    document.getElementById("error").innerHTML = errorMessage;
+                    return false; // Prevent form submission if there's an error
+                }
+
+                return true; // Allow form submission if no errors
+            }
+        </script>
+
+    </body>
+
+</html>
